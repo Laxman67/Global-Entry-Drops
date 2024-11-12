@@ -1,0 +1,16 @@
+{
+    "name": "Golbal Entry Drops",
+    "manifest_version": 3,
+    "version": "1.0.0",
+    "action": {
+        "default_popup": "popup/popup.html"
+    },
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "permissions": [
+        "storage",
+        "alarms"
+    ]
+}
