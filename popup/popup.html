@@ -20,8 +20,12 @@
       <div class="field">
         <label class="">Status</label>
         <div>
-          <span class="bg-success text-white p-1 rounded tag">Running</span>
-          <span class="bg-danger text-white p-1 rounded tag">Stopped</span>
+          <span class="bg-success text-white p-1 rounded tag" id="runningSpan"
+            >Running</span
+          >
+          <span class="bg-danger text-white p-1 rounded tag" id="stoppedSpan"
+            >Stopped</span
+          >
         </div>
       </div>
     </div>
@@ -30,18 +34,40 @@
       <label for="">Location ID</label>
       <div class="select">
         <select id="locationId"></select>
+        <p
+          id="locationIdError"
+          class="text-danger"
+          style="display: none; font-weight: 500"
+        >
+          Please Select a Valid Address
+        </p>
       </div>
 
-      <div class="d-flex my-3 flex-column">
+      <div class="d-flex mt-3 flex-column">
         <label for="" class="label font-weight-bold"
           ><strong>Start Date</strong></label
         >
         <input type="date" name="" id="startDate" />
+        <p
+          id="startDateError"
+          class="text-danger"
+          style="display: none; font-weight: 500"
+        >
+          Please Select a Valid Start Date
+        </p>
       </div>
 
       <div class="d-flex my-3 flex-column">
         <label for="" class="label"><strong>End Date</strong></label>
         <input type="date" name="" id="endDate" />
+
+        <p
+          id="endDateError"
+          class="text-danger"
+          style="display: none; font-weight: 500"
+        >
+          Please Select a Valid End Date
+        </p>
       </div>
     </div>
 
@@ -54,8 +80,10 @@
       </button>
     </div>
 
-    <div class="container" id="stopButton">
-      <button class="bg-danger text-white p-1 rounded border-0">Stop</button>
+    <div class="container">
+      <button class="bg-danger text-white p-1 rounded border-0" id="stopButton">
+        Stop
+      </button>
     </div>
 
     <script

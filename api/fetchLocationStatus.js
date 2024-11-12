@@ -14,7 +14,7 @@ export default function () {
 
       filteredLocations.sort((a, b) => a.name.localeCompare(b.name));
       chrome.storage.local.set({ locations: filteredLocations });
-      console.log(filteredLocations);
+      // console.log(filteredLocations);
     })
     .catch((error) => {
       console.log(error);

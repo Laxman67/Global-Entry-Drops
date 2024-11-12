@@ -1,7 +1,7 @@
 import fetchLocations from './api/fetchLocationStatus.js';
 const ALARM_JOB_NAME = 'DROP_ALARM';
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener(({ reason }) => {
   fetchLocations();
 });
 
@@ -23,17 +23,23 @@ chrome.runtime.onMessage.addListener((data) => {
 
 const handleOnStop = () => {
   console.log('On Stop in backgrounds');
+  setRunningStatus(false);
+
   stopAlarm();
 };
 
 const handleOnStart = (prefs) => {
-  console.log('On Start in Background');
   console.log('prefs : ', prefs);
-  //   Storage
   chrome.storage.local.set(prefs);
+  setRunningStatus(true);
+
   createAlarm();
 };
 
+const setRunningStatus = (isRunning) => {
+  // set({ isRunning: true });
+  chrome.storage.local.set({ isRunning });
+};
 const createAlarm = () => {
   chrome.alarms.get(ALARM_JOB_NAME, (existingAlarm) => {
     if (!existingAlarm) {
@@ -46,6 +52,7 @@ const stopAlarm = () => {
   chrome.alarms.clearAll();
 };
 
+// This code will run each min when alarms went off
 chrome.alarms.onAlarm.addListener(() => {
   console.log('OnAlarm schedules code running...');
 });
