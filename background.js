@@ -1,5 +1,8 @@
-import fetchLocations from './api/fetchLocationStatus.js';
+import { fetchLocations } from './api/fetchLocationStatus.js';
+import { fetchOpenSlots } from './api/fetchOpenSlots.js';
 const ALARM_JOB_NAME = 'DROP_ALARM';
+
+let catchedPref = {};
 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   fetchLocations();
@@ -24,12 +27,13 @@ chrome.runtime.onMessage.addListener((data) => {
 const handleOnStop = () => {
   console.log('On Stop in backgrounds');
   setRunningStatus(false);
-
   stopAlarm();
+  catchedPref = {};
 };
 
 const handleOnStart = (prefs) => {
   console.log('prefs : ', prefs);
+  catchedPref = prefs;
   chrome.storage.local.set(prefs);
   setRunningStatus(true);
 
@@ -55,4 +59,5 @@ const stopAlarm = () => {
 // This code will run each min when alarms went off
 chrome.alarms.onAlarm.addListener(() => {
   console.log('OnAlarm schedules code running...');
+  fetchOpenSlots(catchedPref);
 });

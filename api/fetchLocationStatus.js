@@ -1,7 +1,7 @@
 const LOCATION_URL =
   'https://ttp.cbp.dhs.gov/schedulerapi/locations/?temporary=false&inviteOnly=false&operational=true';
 
-export default function () {
+export const fetchLocations = () => {
   fetch(LOCATION_URL)
     .then((response) => response.json())
     .then((data) => {
@@ -19,4 +19,4 @@ export default function () {
     .catch((error) => {
       console.log(error);
     });
-}
+};
